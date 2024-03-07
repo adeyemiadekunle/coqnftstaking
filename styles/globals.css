@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+@font-face {
+  font-family: "Lilita";
+  src: url("/fonts/LilitaOne-Regular.ttf") format("truetype");
+  /* Other font properties like font-weight and font-style may also be defined here */
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  padding-bottom: 250px;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+:root {
+  --black: #1c1e21;
+  --white: #ffffff;
+  --tw-color1: #a855f7;
+  --tw-color1-hover: #9333ea;
+}
+
+body {
+  background: var(--black);
+  font-family: "Lilita", sans-serif;
+  color: var(--white);
+  display: flex;
+  margin: 0;
+  background: url("/T_background_page.png");
+  background-size: cover auto;
+}
+
+h2 {
+  font-size: 2rem;
+  text-shadow: 0px 5px 0 black, -2px -2px 0 #000, 0 -2px 0 #000, 2px -2px 0 #000,
+    2px 0 0 #000, 2px 2px 0 #000, 0 2px 0 #000, -2px 2px 0 #000, -2px 0 0 #000;
+}
+
+ h3 {
+  text-shadow: 0px 4px 0 black, -2px -2px 0 #000, 0 -2px 0 #000, 2px -2px 0 #000,
+    2px 0 0 #000, 2px 2px 0 #000, 0 2px 0 #000, -2px 2px 0 #000, -2px 0 0 #000;
+}
+
+/*
+h4 {
+  text-shadow: 0px 2px 0 black, -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000,
+  1px 0 0 #000, 1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000; 
+} */
+
