@@ -1,5 +1,4 @@
 import {
-  ConnectWallet,
   ThirdwebNftMedia,
   useAddress,
   useContract,
@@ -11,7 +10,7 @@ import {
 import { BigNumber, ethers } from "ethers";
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
-import NFTCard from "../components/NFTCard";
+import NFTCard from "./NFTCard";
 import {
   nftDropContractAddress,
   stakingContractAddress,
@@ -20,6 +19,7 @@ import {
 
 import formatUnits from "../utils/formatUnits";
 import styles from "../styles/Home.module.css";
+import Header from "./Header";
 
 const Stake: NextPage = () => {
   const address = useAddress();
@@ -69,12 +69,9 @@ const Stake: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.h1}>Stake Your Coq Hero NFTs</h1>
-      <hr className={`${styles.divider} ${styles.spacerTop}`} />
-
-      {!address ? (
-        <ConnectWallet />
-      ) : (
+      <Header/>
+      {/* <h1 className={styles.h1}>Stake Your Coq Hero NFTs</h1> */}
+      {/* <hr className={`${styles.divider} ${styles.spacerTop}`} /> */}
         <>
           <h2>Your Tokens</h2>
           <div className={styles.tokenGrid}>
@@ -137,7 +134,6 @@ const Stake: NextPage = () => {
             ))}
           </div>
         </>
-      )}
     </div>
   );
 };

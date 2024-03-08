@@ -1,43 +1,47 @@
-import type { NextPage } from "next";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import styles from "../styles/Home.module.css";
+import type { NextPage } from 'next';
+import Image from 'next/image';
+import styles from '../styles/Home.module.css';
+import Stake from '../components/stake';
+import { ConnectWallet, useAddress } from '@thirdweb-dev/react';
+import Header from '../components/Header';
 
 const Home: NextPage = () => {
-  const router = useRouter();
-
+  const address = useAddress();
   return (
-    <div className={styles.container}>
+    <div >
       {/* Top Section */}
-      <h1 className={styles.h1}>Coq Hero NFTs</h1>
-      <div className={styles.nftBoxGrid}>
-        <div
-          className={styles.optionSelectBox}
-          role="button"
-          onClick={() => router.push("/mint")}
-        >
-          {/* Mint a new NFT */}
-          <Image src="/icons/drop.webp" alt="drop" width={64} height={64} />
-          <h2 className={styles.selectBoxTitle}>Mint a new NFT</h2>
-          <p className={styles.selectBoxDescription}>
-            Use the NFT Drop Contract to claim an NFT from the collection.
-          </p>
-        </div>
+      {!address ? (
+        <div className={styles.home}>
+          <div>
+            <h1 className={styles.h1}> Welcome to Coq Hero NFTs Staking</h1>
+          </div>
+          
+          <div className={styles.image}>
+            <Image src="/T_Wrench_NFT.png" alt="NFT" width={400} height={400} />
+          </div>
 
-        <div
-          className={styles.optionSelectBox}
-          role="button"
-          onClick={() => router.push("/stake")}
-        >
-          {/* Staking an NFT */}
-          <Image src="/icons/token.webp" alt="token" width={64} height={64} />
-          <h2 className={styles.selectBoxTitle}>Stake Your NFTs</h2>
-          <p className={styles.selectBoxDescription}>
-            Use the custom staking contract deployed via <b>thirdweb Deploy</b>{" "}
-            to stake your NFTs, and earn tokens from the <b>Token</b> contract.
-          </p>
+          <div className={styles.walletContainer} >
+          <ConnectWallet
+          modalSize={"wide"}
+          modalTitle={"Connect"}
+          modalTitleIconUrl={"/Coq_hero_Logo.png"}
+          
+          welcomeScreen={{
+            img: {
+              src: "/T_Doc_Med.png",
+              width: 150,
+              height: 150,
+            },
+            title: "Welcome to Coq Hero Staking",
+          }}
+           />
+          </div>
         </div>
-      </div>
+      ) : (
+      
+       <Stake /> 
+       
+      )}
     </div>
   );
 };
