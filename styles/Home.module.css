@@ -12,29 +12,38 @@
 
 .home {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   position: absolute;
-  padding: 0 24px;
-  /* height: 100vh; */
+  padding: 0 120px;
+  height: 100vh;
+  margin: 0 auto;
 }
 
+
 .image {
-  margin-top: 50px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .walletContainer {
-  margin-top: 50px;
+  /* margin-top: 50px; */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 }
 
 .h1 {
-  margin-bottom: 0px;
+  margin-bottom: 50px;
   font-size: 3rem;
   text-align: center;
   text-shadow: 0px 8px 0 black, -2px -2px 0 #000, 0 -2px 0 #000, 2px -2px 0 #000,
     2px 0 0 #000, 2px 2px 0 #000, 0 2px 0 #000, -2px 2px 0 #000, -2px 0 0 #000;
+  width: 90%;
   
 }
 
@@ -82,6 +91,7 @@
   align-items: center;
 
 }
+
 
 .optionSelectBox {
   border-radius: 16px;
@@ -184,10 +194,34 @@
     width: 90%;
     margin-top: 12px;
   }
+
+  .image {
+    display: none;
+  }
+
+
+  .nftBox {
+    width: 90%;
+  }
 }
+
 
 /* Screen less than 630, then hide .center */
 @media only screen and (max-width: 630px) {
+
+   .home {
+    padding: 0;
+   }
+
+.h1 {
+  font-size: 1.8rem;
+  width: 100%;
+
+}
+  .nftBox {
+    width: 90%;
+  }
+
   .center {
     display: none;
   }
@@ -226,4 +260,27 @@
   padding: 10px 0;
   margin-bottom: 10px;
 
+}
+
+
+.loadingcontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+  margin-top: 200px;
+}
+
+.loadingspinner {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

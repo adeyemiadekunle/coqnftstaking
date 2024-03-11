@@ -11,6 +11,16 @@ const Header: NextPage = () => {
           <a href="https://coqhero.com/">
             <Image src='/Coq_hero_Logo.png' alt="logo" width={120} height={60} />
           </a>
+          <style>
+              {`
+                    @media (max-width: 630px) {
+                        img {
+                            width: 100px;
+                            height: 50px;
+                        }
+                    }
+                `}
+            </style>
         </div>
         <div className={styles.connect}>
           <ConnectWallet 

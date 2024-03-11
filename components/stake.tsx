@@ -20,6 +20,7 @@ import {
 import formatUnits from "../utils/formatUnits";
 import styles from "../styles/Home.module.css";
 import Header from "./Header";
+import Loading from "./Loading";
 
 const Stake: NextPage = () => {
   const address = useAddress();
@@ -63,77 +64,78 @@ const Stake: NextPage = () => {
     await contract?.call("stake", [[id]]);
   }
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
+ 
   return (
     <div className={styles.container}>
       <Header/>
       {/* <h1 className={styles.h1}>Stake Your Coq Hero NFTs</h1> */}
-      {/* <hr className={`${styles.divider} ${styles.spacerTop}`} /> */}
-        <>
-          <h2>Your Tokens</h2>
-          <div className={styles.tokenGrid}>
-            <div className={styles.tokenItem}>
-              <h3 className={styles.tokenLabel}>Claimable Rewards</h3>
-              <p className={styles.tokenValue}>
-                <b>
-                  {!claimableRewards
-                    ? "Loading..."
-                    : formatUnits(ethers.BigNumber.from(claimableRewards), 18, 4)}
-                </b> {" "}
+      { isLoading ? (<>
+        <Loading/>
+      </>): (
+         <>
+         <h2>Your Tokens</h2>
+         <div className={styles.tokenGrid}>
+           <div className={styles.tokenItem}>
+             <h3 className={styles.tokenLabel}>Claimable Rewards</h3>
+             <p className={styles.tokenValue}>
+               <b>
+                 {!claimableRewards
+                   ? "Loading..."
+                   : formatUnits(ethers.BigNumber.from(claimableRewards), 18, 2)}
+               </b> {" "}
 
-                 {tokenBalance?.symbol}
-              </p>
-            </div>
-            <div className={styles.tokenItem}>
-              <h3 className={styles.tokenLabel}>Current Balance</h3>
-              <p className={styles.tokenValue}>
-                <b>{tokenBalance?.displayValue}</b> {tokenBalance?.symbol}
-              </p>
-            </div>
-          </div>
+                {tokenBalance?.symbol}
+             </p>
+           </div>
+           <div className={styles.tokenItem}>
+             <h3 className={styles.tokenLabel}>Current Balance</h3>
+             <p className={styles.tokenValue}>
+               <b> { tokenBalance ? parseFloat(tokenBalance?.displayValue).toFixed(2) : null}</b> {tokenBalance?.symbol}
+             </p>
+           </div>
+         </div>
 
-          <Web3Button
-            action={(contract) => contract.call("claimRewards")}
-            contractAddress={stakingContractAddress}
-          >
-            Claim Rewards
-          </Web3Button>
+         <Web3Button
+           action={(contract) => contract.call("claimRewards")}
+           contractAddress={stakingContractAddress}
+         >
+           Claim Rewards
+         </Web3Button>
 
-          <hr className={`${styles.divider} ${styles.spacerTop}`} />
-          <h2>Your Staked NFTs</h2>
-          <div className={styles.nftBoxGrid}>
-            {stakedTokens &&
-              stakedTokens[0]?.map((stakedToken: BigNumber) => (
-                <NFTCard
-                  tokenId={stakedToken.toNumber()}
-                  key={stakedToken.toString()}
-                />
-              ))}
-          </div>
+         <hr className={`${styles.divider} ${styles.spacerTop}`} />
+         <h2>Your Staked NFTs</h2>
+         <div className={styles.nftBoxGrid}>
+           {stakedTokens &&
+             stakedTokens[0]?.map((stakedToken: BigNumber) => (
+               <NFTCard
+                 tokenId={stakedToken.toNumber()}
+                 key={stakedToken.toString()}
+               />
+             ))}
+         </div>
 
-          <hr className={`${styles.divider} ${styles.spacerTop}`} />
-          <h2>Your Unstaked NFTs</h2>
-          <div className={styles.nftBoxGrid}>
-            {ownedNfts?.map((nft) => (
-              <div className={styles.nftBox} key={nft.metadata.id.toString()}>
-                <ThirdwebNftMedia
-                  metadata={nft.metadata}
-                  className={styles.nftMedia}
-                />
-                <h3>{nft.metadata.name}</h3>
-                <Web3Button
-                  contractAddress={stakingContractAddress}
-                  action={() => stakeNft(nft.metadata.id)}
-                >
-                  Stake
-                </Web3Button>
-              </div>
-            ))}
-          </div>
-        </>
+         <hr className={`${styles.divider} ${styles.spacerTop}`} />
+         <h2>Your Unstaked NFTs</h2>
+         <div className={styles.nftBoxGrid}>
+           {ownedNfts?.map((nft) => (
+             <div className={styles.nftBox} key={nft.metadata.id.toString()}>
+               <ThirdwebNftMedia
+                 metadata={nft.metadata}
+                 className={styles.nftMedia}
+               />
+               <h3>{nft.metadata.name}</h3>
+               <Web3Button
+                 contractAddress={stakingContractAddress}
+                 action={() => stakeNft(nft.metadata.id)}
+               >
+                 Stake
+               </Web3Button>
+             </div>
+           ))}
+         </div>
+       </>
+      )}
+        
     </div>
   );
 };
